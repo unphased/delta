@@ -562,7 +562,7 @@ pub struct Opt {
 
     #[arg(
         long = "hyperlinks-file-link-format",
-        default_value = "file://{hostname}/{path}",
+        default_value = "file://{hostname}{path}",
         value_name = "FMT"
     )]
     /// Format string for file hyperlinks (requires --hyperlinks).
@@ -572,7 +572,7 @@ pub struct Opt {
     /// creates hyperlinks using standard file URLs including the hostname; your operating system
     /// should open these in the application registered for that file type. However, these do not
     /// make use of the line number. In order for the link to open the file at the correct line
-    /// number, you could use a custom URL format such as "file-line://{hostname}/{path}:{line}"
+    /// number, you could use a custom URL format such as "file-line://{hostname}{path}:{line}"
     /// and register an application to handle the custom "file-line" URL scheme by opening the file
     /// in your editor/IDE at the indicated line number. See
     /// https://github.com/dandavison/open-in-editor for an example.
