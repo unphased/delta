@@ -562,7 +562,7 @@ pub struct Opt {
 
     #[arg(
         long = "hyperlinks-file-link-format",
-        default_value = "file://{hostname}{path}",
+        default_value = "file://{path}",
         value_name = "FMT"
     )]
     /// Format string for file hyperlinks (requires --hyperlinks).
