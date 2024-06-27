@@ -3,6 +3,7 @@ use std::path::Path;
 
 use lazy_static::lazy_static;
 use regex::{Captures, Regex};
+use hostname;
 
 use crate::config::Config;
 use crate::features::OptionValueFunction;
@@ -53,8 +54,10 @@ where
     P: std::fmt::Debug,
 {
     debug_assert!(absolute_path.as_ref().is_absolute());
+    let hostname = hostname::get().unwrap_or_default().to_string_lossy().into_owned();
     let mut url = config
         .hyperlinks_file_link_format
+        .replace("{hostname}", &hostname)
         .replace("{path}", &absolute_path.as_ref().to_string_lossy());
     if let Some(n) = line_number {
         url = url.replace("{line}", &format!("{n}"))
