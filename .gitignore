@@ -5,3 +5,4 @@ performance/index.html
 src/junk.rs
 **/*.rs.bk
 /target
+.aider*
