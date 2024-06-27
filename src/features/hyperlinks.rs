@@ -60,7 +60,7 @@ where
         .replace("{hostname}", &hostname)
         .replace("{path}", &absolute_path.as_ref().to_string_lossy());
     if let Some(n) = line_number {
-        url = url.replace("{line}", &format!("{n}"))
+        url = url.replace("{line}", &format!(":{n}"))
     } else {
         url = url.replace("{line}", "")
     };

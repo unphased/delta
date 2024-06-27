@@ -573,9 +573,11 @@ pub struct Opt {
     /// these in the application registered for that file type. However, these do not make use
     /// of the line number. In order for the link to open the file at the correct line number
     /// and address working on a remote environment, you could use a custom URL format such as
-    /// "file-line://{hostname}{path}:{line}" and register an application to handle such a custom
+    /// "file-line://{hostname}{path}{line}" and register an application to handle such a custom
     /// URL scheme by opening the file in your editor/IDE at the indicated line number. See
     /// https://github.com/dandavison/open-in-editor for an example.
+    /// Note that the line number is sometimes not present and the colon will be included if the
+    /// line number is present, so do not include the colon in this format string.
     pub hyperlinks_file_link_format: String,
 
     #[arg(
