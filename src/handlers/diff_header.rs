@@ -273,6 +273,9 @@ pub fn write_generic_diff_header_header_line(
     mode_info: &mut String,
     config: &Config,
 ) -> std::io::Result<()> {
+    // If file_style is "omit", we'll skip the process and print nothing.
+    // However in the case of color_only mode,
+    // we won't skip because we can't change raw_line structure.
     if config.file_style.is_omitted && !config.color_only {
         return Ok(());
     }
@@ -282,15 +285,10 @@ pub fn write_generic_diff_header_header_line(
         // Maintain 1-1 correspondence between input and output lines.
         writeln!(painter.writer)?;
     }
-    
-    // Apply OSC8 hyperlink transform to the line
-    let transformed_line = apply_osc8_hyperlink(line, config);
-    let transformed_raw_line = apply_osc8_hyperlink(raw_line, config);
-    
     draw_fn(
         painter.writer,
-        &format!("{}{}", transformed_line, if pad { " " } else { "" }),
-        &format!("{}{}", transformed_raw_line, if pad { " " } else { "" }),
+        &format!("{}{}", line, if pad { " " } else { "" }),
+        &format!("{}{}", raw_line, if pad { " " } else { "" }),
         mode_info,
         &config.decorations_width,
         config.file_style,
