@@ -126,6 +126,7 @@ impl<'a> StateMachine<'a> {
             line: "".to_string(),
             raw_line: "".to_string(),
             state: State::Unknown,
+            file_decorator_filter: config.file_decorator_filter.clone(),
             source: Source::Unknown,
             minus_file: "".to_string(),
             plus_file: "".to_string(),

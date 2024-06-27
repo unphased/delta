@@ -273,11 +273,13 @@ pub fn write_generic_diff_header_header_line(
     mode_info: &mut String,
     config: &Config,
 ) -> std::io::Result<()> {
-    // If file_style is "omit", we'll skip the process and print nothing.
-    // However in the case of color_only mode,
-    // we won't skip because we can't change raw_line structure.
     if config.file_style.is_omitted && !config.color_only {
         return Ok(());
+    }
+    if let Some(filter) = &config.file_decorator_filter {
+        if !line.contains(filter) {
+            return Ok(());
+        }
     }
     let (mut draw_fn, pad, decoration_ansi_term_style) =
         draw::get_draw_function(config.file_style.decoration_style);
