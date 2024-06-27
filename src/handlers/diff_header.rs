@@ -287,10 +287,15 @@ pub fn write_generic_diff_header_header_line(
         // Maintain 1-1 correspondence between input and output lines.
         writeln!(painter.writer)?;
     }
+    
+    // Apply OSC8 hyperlink transform to the line
+    let transformed_line = apply_osc8_hyperlink(line, config);
+    let transformed_raw_line = apply_osc8_hyperlink(raw_line, config);
+    
     draw_fn(
         painter.writer,
-        &format!("{}{}", line, if pad { " " } else { "" }),
-        &format!("{}{}", raw_line, if pad { " " } else { "" }),
+        &format!("{}{}", transformed_line, if pad { " " } else { "" }),
+        &format!("{}{}", transformed_raw_line, if pad { " " } else { "" }),
         mode_info,
         &config.decorations_width,
         config.file_style,
@@ -640,5 +645,14 @@ mod tests {
                 "diff --git a/.config/Code - Insiders/User/settings.json b/.config/Code - Insiders/User/settings.json"),
             Some(".config/Code - Insiders/User/settings.json".to_string())
         );
+    }
+}
+fn apply_osc8_hyperlink(text: &str, config: &Config) -> String {
+    // This is a placeholder implementation. You'll need to replace this
+    // with your actual OSC8 hyperlink logic.
+    if config.hyperlinks {
+        format!("\x1b]8;;file://{}\x1b\\{}\x1b]8;;\x1b\\", text, text)
+    } else {
+        text.to_string()
     }
 }
