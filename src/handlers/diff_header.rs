@@ -642,11 +642,12 @@ mod tests {
         );
     }
 }
+use hostname;
+
 fn apply_osc8_hyperlink(text: &str, config: &Config) -> String {
-    // This is a placeholder implementation. You'll need to replace this
-    // with your actual OSC8 hyperlink logic.
     if config.hyperlinks {
-        format!("\x1b]8;;file://{}\x1b\\{}\x1b]8;;\x1b\\", text, text)
+        let hostname = hostname::get().unwrap_or_default().to_string_lossy().into_owned();
+        format!("\x1b]8;;file://{}/{}\x1b\\{}\x1b]8;;\x1b\\", hostname, text, text)
     } else {
         text.to_string()
     }

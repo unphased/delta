@@ -69,3 +69,5 @@ features = []
 
 [profile.test]
 opt-level = 2
+[dependencies]
+hostname = "0.3"
