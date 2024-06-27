@@ -40,7 +40,6 @@ pub struct Config {
     pub background_color_extends_to_terminal_width: bool,
     pub blame_code_style: Option<Style>,
     pub blame_format: String,
-    pub file_decorator_filter: Option<String>,
     pub blame_separator_format: BlameLineNumbers,
     pub blame_palette: Vec<String>,
     pub blame_separator_style: Option<Style>,

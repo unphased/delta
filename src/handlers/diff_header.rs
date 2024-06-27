@@ -276,11 +276,6 @@ pub fn write_generic_diff_header_header_line(
     if config.file_style.is_omitted && !config.color_only {
         return Ok(());
     }
-    if let Some(filter) = &config.file_decorator_filter {
-        if !line.contains(filter) {
-            return Ok(());
-        }
-    }
     let (mut draw_fn, pad, decoration_ansi_term_style) =
         draw::get_draw_function(config.file_style.decoration_style);
     if !config.color_only {
